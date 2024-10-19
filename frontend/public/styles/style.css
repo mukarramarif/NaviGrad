@@ -1,0 +1,145 @@
+body{
+    width: 100%;
+    height: 150vh;
+    margin: auto;
+    background-color: rgb(230, 230, 230);
+    overflow-x: hidden;
+
+    font-family: "Open Sans", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+header{
+    text-align: center;
+    background-color: rgb(245, 186, 66);
+    padding-top: 10px;
+    padding-bottom: 5px;
+    width: 100vw;
+}
+
+#banner{
+    width: 100%;
+    height: 50vh; 
+    display: flex; 
+    justify-content: center;  
+    align-items: center;   
+    overflow: hidden;
+}
+
+.banner{
+    width: 98%;
+    height: auto;
+    object-fit: cover; 
+
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 65%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 65%);
+}
+
+#blurb{
+    text-align: center;
+    margin: auto;
+    margin-top: -3vw;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#subtitle{
+    font-weight: 500;
+    font-size: xx-large;
+}
+
+#description{
+    font-weight: 400;
+    font-size: large;
+}
+
+#inputs{
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: medium;
+}
+
+.inputBox{
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 3px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+}
+
+.inputBox:focus{
+    outline: none;
+    border: 2px solid rgb(245, 186, 66);
+    box-shadow: 0 0 5px rgba(245, 186, 66, 0.5);
+}
+
+#initialSubmit{
+    padding: 12px 24px;
+    margin-top: 3px;
+    border: none;
+    border-radius: 5px;
+    background-color: #966800;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#initialSubmit:hover {
+    background-color: #c5900e; /* Lighter shade on hover */
+    transform: translateY(-2px);
+}
+
+#initialSubmit:active {
+    background-color: #6a4300; /* Darker shade when active */
+    transform: translateY(0); /* Reset position */
+}
+
+.fileInput {
+    display: none; /* Hide the default file input */
+}
+
+.customInput {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #a06651;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #a06651;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.customInput:hover {
+    background-color: #a06651;
+    color: #fff;
+}
+
+.customInput:active {
+    background-color: #cc6f4d;
+    box-shadow: 0 0 5px rgba(204, 111, 77, 0.5);
+}
+
+.fileName {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+#submitText{
+    font-size: small;
+    margin-top: 10px;
+    opacity: 70%;
+}

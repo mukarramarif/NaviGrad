@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AI Academic Advising</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet"> <!--header-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"> <!--body-->
+</head>
+
+<body>
+    <header><img src="images/logo.png" alt="NaviGrad logo" width="291vw" height="81vw"></header>
+    <div id="banner"><img src="images/grads.jpg" alt="banner" class="banner"></div>
+
+    <div id="blurb">
+        <p id="subtitle">Plan, Track, Succeed with AI</p>
+        <p id="description">Empower your academic journey with personalized planning and smart insights to help you stay organized and achieve your goals.</p>
+    </div>
+    <br>
+    <div id="inputs">
+        <p>First, tell Chip a little bit about yourself~</p>
+        <input type="text" id="major" class="inputBox" placeholder="Major"/><br>
+        <input type="text" id="year" class="inputBox" placeholder="Year"/><br>
+        <input type="text" id="courses" class="inputBox" placeholder="Courses Taken"/><br>
+        <input type="text" id="career" class="inputBox" placeholder="Career Goals"/><br>
+        <br>
+        <input type="file" name="pdfUpload" accept="application/pdf" id="fileInput" class="fileInput" />
+        <label for="fileInput" class="customInput">Upload Resume</label>
+        <div class="fileName" id="fileName">No file chosen</div>
+        
+        <button type="button" id="initialSubmit">Message Chip</button>
+        <div id="submitText">(All fields are optional, but the more we know, the more we can help!)</div> 
+    </div>
+    
+    <script src="scripts/jquery.min.js" crossorigin="anonymous" defer></script>
+    <script src="scripts/script.js" defer></script>
+</body>
+</html>
