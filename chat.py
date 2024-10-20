@@ -13,6 +13,22 @@ bedrock_runtime = boto3.client(
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
 )
 
+# def Post(response):
+#     url = "/Sendinfo"
+
+#     try:
+#         response = requests.post(url, json={})
+
+#         # Check if the request was successful
+#         if response.status_code == 200:
+#             print("Response data:", response.json())  # Assuming the response is JSON formatted
+#         else:
+#             print(f"POST request failed with status code: {response.status_code}")
+#             print("Error response:", response.text)
+
+#     except Exception as e:
+#         print("An error occurred:", str(e))
+
 # Initialize conversation history
 conversation_history = ""
 conversation_history += ("{'role': 'user', 'content': 'Hi, what is your name?'},'role': 'assistant', 'content': 'Hi! My name is Chip, your AI academic counselor.'")
@@ -52,7 +68,17 @@ while not done:
         # Parse and print the response
         response_body = json.loads(response['body'].read())
         model_response = response_body['content'][0]['text']
-        print("Response:", model_response)
+
+        file_path = "conversation_history.json"
+
+       
+
+        url = "/Sendinfo"
+
+        
+
+
+        print("Chip's response:", model_response)
 
             # Append to conversation history
         conversation_history += "{'role': 'user', 'content':" + prompt + "}"
