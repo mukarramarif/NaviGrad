@@ -47,7 +47,7 @@ $('#sendBtn').click(() => {
             url: '/upload/json', //replace with server endpoint
             type: 'POST',
             data: jsonString,
-            contentType: false,
+            contentType: 'application/json',
             processData: false,
             success: function(response) {
                 console.log('Success:', response);
