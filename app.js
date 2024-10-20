@@ -124,7 +124,8 @@ app.post('/upload/json', (req, res) => {
 
       
       // Parse the cleaned output
-      const jsonResponse = JSON.parse(pythonOutput.trim());
+      console.log("trimed output",pythonOutput.trim());
+      const jsonResponse = JSON.parse(pythonOutput);
 
       // Send the JSON response
       res.status(200).json(jsonResponse);
@@ -210,7 +211,7 @@ app.get('/upload/message', (req, res) => {
     }
     console.log('Prompt saved to prompt.txt');
   });
-  const pythonProcess = spawn('python', [pathToPythonScript, promptFilePath]);
+  const pythonProcess = spawn('python');
 
   let pythonOutput = '';
 

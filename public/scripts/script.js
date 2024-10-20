@@ -54,8 +54,11 @@ $('#sendBtn').click(() => {
                     const data = response; 
                     console.log('Received Data:', data);
                     msg = data.content;
+                    writeResponse(msg);
+                    waiting = false;
                 } catch (e) {
                     console.error('Failed to parse JSON:', e);
+                    waiting = false;
                 }
             },
             error: function(_, textStatus, errorThrown) {
@@ -63,7 +66,7 @@ $('#sendBtn').click(() => {
             }
         });
     
-        writeResponse(msg);
+        
     }
 
 
@@ -110,16 +113,17 @@ async function firstClick(){
             const data = response; 
             console.log('Received Data:', data);
             msg = data.content;
+            writeResponse(msg);
+            waiting = false;
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error('Error:', textStatus, errorThrown);
+            waiting = false;
         }
     });
 
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-    await sleep(2000);
-    msg = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    writeResponse(msg);
+   
+    
 }
 
 async function writeResponse(msg){
@@ -140,7 +144,7 @@ async function writeResponse(msg){
     }
     msgCount++;
     $("#chatInputContainer").show();
-    waiting = false;
+    
 }
 
 /*

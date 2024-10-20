@@ -1,3 +1,4 @@
+import sys
 import boto3
 import json
 import os
@@ -54,7 +55,7 @@ done = False
 counter = 1
 
 while not done:
-    prompt = input("You: ")
+    prompt = "{'role': 'user', 'content': 'What are the required courses for a mechanical engineering major?'}"
     
     if prompt.lower() in ["quit","exit","done"]:
         break
@@ -87,11 +88,15 @@ while not done:
 
         file_path = "conversation_history.json"
 
-        print("Chip's response:", model_response)
+        # print("Chip's response:", model_response)
 
         # Append to conversation history
         conversation_history += "{'role': 'user', 'content':" + prompt + "}"
         conversation_history += "{'role': 'assistant', 'content':" + model_response + "}"
+        done = True
+        response_json = {"role": "assistant", "content": model_response}
+        print(json.dumps(response_json))
+        
 
 
     except ClientError as e:
