@@ -35,8 +35,11 @@ with open('requiredcourses.csv', 'r') as file:
         csv_data = [row for row in csv_reader]
         csv_string = "\n".join([",".join(row) for row in csv_data])
     
-print(csv_string)
-required_courses = "'According to what I entered in the website, I am a mechanical engineering major and these are the courses required " + csv_string + "'"
+with open('data.csv', 'r') as file:
+        csv_reader = csv.reader(file)
+        for row in csv_reader:
+            major,year, coursestaken, career = row
+required_courses = "'According to what I entered in the website, I am a {major}} major a {year}, i have taken the courses {courses}, and I want to do {career} and these are the courses required for mechanical engineering major " + csv_string + "'"
 
 
 
@@ -101,5 +104,3 @@ while not done:
     # print(f"AWS Region: {bedrock_runtime.meta.region_name}")
     # print(f"Model used: {model_id}")
     # print("Please ensure you have the correct permissions and that this model is available in your region.")
-
-
