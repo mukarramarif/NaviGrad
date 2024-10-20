@@ -1,0 +1,10 @@
+[
+    {
+        "role": "user",
+        "content": "What's the difference between Amazon Aurora and RDS?"
+    },
+    {
+        "role": "assistant",
+        "content": "Amazon Aurora and Amazon RDS (Relational Database Service) are both managed database services provided by AWS, but they have some key differences:\n\n1. Database Engine:\n   - RDS supports multiple database engines: MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server.\n   - Aurora is specifically designed to be compatible with MySQL and PostgreSQL.\n\n2. Performance:\n   - Aurora offers significantly better performance compared to standard RDS instances, claiming up to 5x the throughput of standard MySQL and 3x that of standard PostgreSQL.\n\n3. Scalability:\n   - Aurora provides better scalability with its distributed, fault-tolerant design.\n   - RDS scales through traditional methods like read replicas and vertical scaling.\n\n4. Storage:\n   - Aurora uses a distributed storage system that automatically grows in 10GB increments, up to 128TB.\n   - RDS uses Elastic Block Store (EBS) volumes with a maximum size of 65TB.\n\n5. Replication:\n   - Aurora offers near-instantaneous failover with up to 15 read replicas.\n   - RDS offers asynchronous replication with up to 5 read replicas.\n\n6. Backup and Recovery:\n   - Aurora provides faster backup and recovery times due to its distributed architecture.\n   - RDS uses traditional backup methods, which can be"
+    }
+]
