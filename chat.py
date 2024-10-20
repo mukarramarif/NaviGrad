@@ -34,12 +34,14 @@ with open('requiredcourses.csv', 'r') as file:
         csv_reader = csv.reader(file)
         csv_data = [row for row in csv_reader]
         csv_string = "\n".join([",".join(row) for row in csv_data])
-    
-with open('data.csv', 'r') as file:
+major,year, coursestaken, career = "","","",""
+with open('uploads/data.csv', 'r') as file:
         csv_reader = csv.reader(file)
         for row in csv_reader:
-            major,year, coursestaken, career = row
-required_courses = "'According to what I entered in the website, I am a {major}} major a {year}, i have taken the courses {courses}, and I want to do {career} and these are the courses required for mechanical engineering major " + csv_string + "'"
+            major,year, career, coursestaken= row
+            # print(row)
+            # print(major, year, coursestaken, career)
+required_courses = f"'According to what I entered in the website, I am a {major} major in {year}, I have taken the courses {coursestaken}, and I want to pursue a career in {career}. These are the courses required for a mechanical engineering major: {csv_string}'"
 
 
 
