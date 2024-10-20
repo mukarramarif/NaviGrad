@@ -67,7 +67,7 @@ app.post('/upload/json', (req, res) => {
   if (!major || !year || !courses || !career) {
     return res.status(400).json({ message: 'All fields are required' });
   }
-
+  
   
  
 
