@@ -29,7 +29,6 @@ $('#initialSubmit').click(() => {
     }
 });
 
-
 $('#sendBtn').click(() => {
     
     if ($('#userInput').val() != "" && !waiting){
@@ -78,12 +77,12 @@ async function firstClick(){
     let courses = $('#courses').val();
     let career = $('#career').val();
 
-    let formData = new FormData();
-    formData.append('type', "initial");
-    formData.append('major', major);
-    formData.append('year', year);
-    formData.append('courses', courses);
-    formData.append('career', career);
+    const msgJson = {
+        'major': major,
+        'year': year,
+        'courses': courses,
+        'career': career
+    };
 
     //pdf handler
     /*
@@ -93,11 +92,7 @@ async function firstClick(){
     }
     formData.append('resume', file);
     */
-    console.log(formData.get('major'));
-    console.log(formData.get('year'));
-    console.log(formData.get('courses'));
-    console.log(formData.get('career'));
-    console.log(formData.get('resume'));
+    console.log(msgJson);
 
     $('#major').val('');
     $('#year').val('');
@@ -120,7 +115,6 @@ async function firstClick(){
             console.error('Error:', textStatus, errorThrown);
         }
     });
-    
 
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     await sleep(2000);
