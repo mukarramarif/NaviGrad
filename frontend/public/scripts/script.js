@@ -31,29 +31,37 @@ $('#initialSubmit').click(() => {
 
 
 $('#sendBtn').click(() => {
-    let userMsg = $('#userInput').val();
-    const msgJson = {"message":userMsg};
-    const jsonString = JSON.stringify(msgJson);
-
-    console.log(jsonString);
-
     
+    if ($('#userInput').val() != "" && !waiting){
+        waiting = true;
+        let userMsg = $('#userInput').val();
+        const msgJson = {"message":userMsg};
+        const jsonString = JSON.stringify(msgJson);
+    
+        console.log(jsonString);
+        $("#chatBox").append(`<div class='userMsg'>${userMsg}</div>`);
+        $('#userInput').val('');
+    
+        /*
+        $.ajax({
+            url: 'your-server-endpoint', //replace with server endpoint
+            type: 'POST',
+            data: jsonString,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log('Success:', response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+            }
+        });
+        */
+    
+        writeResponse("msg");
+    }
 
-    /*
-    $.ajax({
-        url: 'your-server-endpoint', //replace with server endpoint
-        type: 'POST',
-        data: jsonString,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            console.log('Success:', response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-        }
-    });
-    */
+
 });
 
 async function firstClick(){
