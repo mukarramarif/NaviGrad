@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AI Academic Advising</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet"> <!--header-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"> <!--body-->
+</head>
+
+<body>
+    <header><img src="images/logo.png" alt="NaviGrad logo" width="291vw" height="81vw"></header>
+    <div id="banner"><img src="images/grads.jpg" alt="banner" class="banner"></div>
+
+    <div id="blurb">
+        <p id="subtitle">Plan, Track, Succeed with AI</p>
+        <p id="description">Empower your academic journey with personalized planning and smart insights to help you stay organized and achieve your goals.</p>
+    </div>
+    <br>
+    <div id="inputs">
+        <p>First, tell Chip a little bit about yourself~</p>
+        <select name="major" id="major" class="inputBox">
+            <option value="MechanicalEngineering">Mechanical Engineering</option>
+            <option value="ChemicalEngineering">Chemical Engineering</option>
+            <option value="CivilEngineering">Civil Engineering</option>
+        </select><br>
+        <select name="year" id="year" class="inputBox">
+            <option value="Freshman">Freshman</option>
+            <option value="Sophomore">Sophomore</option>
+            <option value="Junior">Junior</option>
+            <option value="Senior">Senior</option>
+        </select><br>
+        <input type="text" id="courses" class="inputBox" placeholder="Courses Taken"/><br>
+        <input type="text" id="career" class="inputBox" placeholder="Career Goals"/><br>
+        <!-- <br>
+        <input type="file" name="pdfUpload" accept="application/pdf" id="fileInput" class="fileInput" />
+        <label for="fileInput" class="customInput">Upload Resume</label>
+        <div class="fileName" id="fileName">No file chosen</div> -->
+        
+        <div id="buttonHolder"><button type="button" id="initialSubmit">Message Chip</button></div>
+        <div id="submitText">(The more we know, the more we can help!)</div> 
+    </div>
+    
+    <div id="chatBox"></div>
+    
+    <div id="chatInputContainer">
+        <textarea id="userInput" rows="2" placeholder="Type your message..."></textarea>
+        <button id="sendBtn">Send</button>
+    </div>
+
+    <script src="scripts/jquery.min.js" crossorigin="anonymous" defer></script>
+    <script src="scripts/script.js" defer></script>
+</body>
+</html>
