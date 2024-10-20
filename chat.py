@@ -55,7 +55,7 @@ done = False
 counter = 1
 
 while not done:
-    prompt = "{'role': 'user', 'content': 'What are the required courses for a mechanical engineering major?'}"
+    prompt = "give me a summary of what I entered in the website"
     
     if prompt.lower() in ["quit","exit","done"]:
         break

@@ -34,10 +34,9 @@ $('#sendBtn').click(() => {
     if ($('#userInput').val() != "" && !waiting){
         waiting = true;
         let userMsg = $('#userInput').val();
-        const msgJson = {"message":userMsg};
         
     
-        console.log(msgJson);
+        console.log(userMsg);
         $("#chatBox").append(`<div class='userMsg'>${userMsg}</div>`);
         $('#userInput').val('');
         $("#chatBox").append(throbber);
@@ -45,7 +44,7 @@ $('#sendBtn').click(() => {
         $.ajax({
             url: '/upload/message', //replace with server endpoint
             type: 'POST',
-            data: JSON.stringify(msgJson),
+            data: JSON.stringify({ message: userMsg }),
             contentType: 'application/json',
             processData: false,
             success: function(response) {
@@ -63,6 +62,7 @@ $('#sendBtn').click(() => {
             },
             error: function(_, textStatus, errorThrown) {
                 console.error('Error:', textStatus, errorThrown);
+                waiting = false;
             }
         });
     

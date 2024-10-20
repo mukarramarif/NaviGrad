@@ -8,6 +8,7 @@ var multer = require('multer');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var app = express();
+var Msgcount = 0;
 const session = require('express-session');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,6 +56,7 @@ const upload = multer({ storage });
 const fs = require('fs');
 const csvWriter = require('csv-writer').createObjectCsvWriter;
 const { spawn } = require('child_process');
+const { count } = require('console');
 if (!fs.existsSync('./uploads')) {
   fs.mkdirSync('./uploads');
 }
@@ -191,7 +193,19 @@ app.post('/upload/json', (req, res) => {
 
   
 // });
-app.get('/upload/message', (req, res) => { 
+app.post('/upload/message', (req, res) => {
+  string = '';
+  firstMsg = false;
+  const resultString = Object.entries(req.body)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(', ');
+  if(Msgcount ==0){
+    firstMsg = true;
+    Msgcount++;
+    string =firstMsg+""+resultString;
+  }
+  console.log('string',string);
+
   const pathToPythonScript = path.join(__dirname, 'chat.py');
   const promptFilePathClear = path.join(__dirname, 'uploads', 'prompt.txt');
 
@@ -204,7 +218,7 @@ app.get('/upload/message', (req, res) => {
   });
   const promptFilePath = path.join(__dirname, 'uploads', 'prompt.txt');
 
-  fs.writeFile(promptFilePath, req.body.content, (err) => {
+  fs.writeFile(promptFilePath, string, (err) => {
     if (err) {
       console.error('Error writing to prompt.txt', err);
       return res.status(500).json({ message: 'Error saving prompt' });
