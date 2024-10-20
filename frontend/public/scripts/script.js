@@ -16,7 +16,49 @@ let throbber = '<div id="throbMsg" class="resMsg"><div class="throbber" id="thro
 let msgCount = 0;
 
 //handles initial submit button
-$('#initialSubmit').click(async () => {
+let hasBeenRun = false;
+let waiting = false;
+$('#initialSubmit').click(() => {
+    if (waiting){    
+        console.log(waiting);
+    }else if (!hasBeenRun){
+        hasBeenRun = !hasBeenRun;
+        firstClick();
+    }else{
+        window.alert("There's a new text box!!! Use it!");
+    }
+});
+
+
+$('#sendBtn').click(() => {
+    let userMsg = $('#userInput').val();
+    const msgJson = {"message":userMsg};
+    const jsonString = JSON.stringify(msgJson);
+
+    console.log(jsonString);
+
+    
+
+    /*
+    $.ajax({
+        url: 'your-server-endpoint', //replace with server endpoint
+        type: 'POST',
+        data: jsonString,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            console.log('Success:', response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', textStatus, errorThrown);
+        }
+    });
+    */
+});
+
+async function firstClick(){
+    waiting = true;
+
     let major = $('#major').val();
     let year = $('#year').val();
     let courses = $('#courses').val();
@@ -68,10 +110,14 @@ $('#initialSubmit').click(async () => {
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     await sleep(2000);
     msg = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    writeResponse(msg);
+}
+
+async function writeResponse(msg){
     let msgWords = msg.split(' ');
     $("#throbMsg").remove();
     $("#chatBox").append(`<div id=${"msg" + msgCount} class='resMsg'></div>`);
-
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
     while (msgWords.length > 0){
         let toAppend = "";
         for (let i = 0; i < 5; i++){
@@ -83,11 +129,10 @@ $('#initialSubmit').click(async () => {
         msgWords.splice(0, 5);
         await sleep(100);
     }
-
     msgCount++;
-
     $("#chatInputContainer").show();
-});
+    waiting = false;
+}
 
 /*
 let newElement = $("<div class='userMsg'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>");
