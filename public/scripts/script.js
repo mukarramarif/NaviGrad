@@ -62,3 +62,15 @@ $('#initialSubmit').click(() => {
     $('#courses').val('');
     $('#career').val('');
 });
+// Make a GET request to /sendinfo
+$.ajax({
+    url: '/sendinfo',
+    type: 'GET',
+    success: function(response) {
+        console.log('GET Request Success:', response);
+        
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error('GET Request Error:', textStatus, errorThrown);
+    }
+});

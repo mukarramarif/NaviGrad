@@ -155,7 +155,15 @@ app.post('/upload/json', (req, res) => {
 // Serve static files (for client testing purposes)
 app.use(express.static('public'));
 
-
+app.get('/getinfo', (req, res) => {
+  if (!req.body.role || !req.body.content){
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+  res.status(200).json({
+    role: req.body.role,
+    content: req.body.content
+  });
+});
 
 // Route to serve index.html
 app.get('/', (req, res) => {
