@@ -44,21 +44,34 @@ with open('uploads/data.csv', 'r') as file:
             # print(major, year, coursestaken, career)
 required_courses = f"'According to what I entered in the website, I am a {major} major in {year}, I have taken the courses {coursestaken}, and I want to pursue a career in {career}. These are the courses required for a mechanical engineering major: {csv_string}'"
 
+with open('uploads/prompt.txt', 'r') as file:
+    prompt = file.read()
+    if prompt[0] == 't':
+         beginning = True
+    else:
+         beginning = False
 
 
-# Initialize conversation history
-conversation_history = ""
-conversation_history += ("{'role': 'user', 'content': 'Hi, what is your name?'},'role': 'assistant', 'content': 'Hi! My name is Chip, your AI academic counselor.'")
-conversation_history += "{'role': 'user', 'content':" + required_courses + "}" 
+if beginning:
+    
+    with open("conversation.txt", 'w') as file:
+        file.write("")
+
+    # Initialize conversation history
+    conversation_history = ""
+    conversation_history += ("{'role': 'user', 'content': 'Hi, what is your name?'},'role': 'assistant', 'content': 'Hi! My name is Chip, your AI academic counselor.'")
+    conversation_history += "{'role': 'user', 'content':" + required_courses + "}" 
 
 done = False
 counter = 1
 
 while not done:
-    prompt = "{'role': 'user', 'content': 'What are the required courses for a mechanical engineering major?'}"
     
     if prompt.lower() in ["quit","exit","done"]:
         break
+
+    with open("conversation.txt", 'r') as file:
+        conversation_history = file.read()
 
     conversation_history += prompt
 
