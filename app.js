@@ -54,6 +54,7 @@ const upload = multer({ storage });
 // Create 'uploads' directory if it doesn't exist
 const fs = require('fs');
 const csvWriter = require('csv-writer').createObjectCsvWriter;
+const { spawn } = require('child_process');
 if (!fs.existsSync('./uploads')) {
   fs.mkdirSync('./uploads');
 }
@@ -94,14 +95,46 @@ app.post('/upload/json', (req, res) => {
       console.error('Error writing to CSV file', err);
     });
  
-  res.status(200).json({
-      message: 'File uploaded successfully',
-      major: major,
-      classYear: year,
-      careerGoals:career,
-      courses: courses
-    });
+  // res.status(200).json({
+  //     message: 'File uploaded successfully',
+  //     major: major,
+  //     classYear: year,
+  //     careerGoals:career,
+  //     courses: courses
+  //   });
+  const pathToPythonScript = path.join(__dirname, 'chat.py');
 
+  const pythonProcess = spawn('python', [pathToPythonScript, 'uploads/data.csv']);
+
+  let pythonOutput = '';
+
+  pythonProcess.stdout.on('data', (data) => {
+    pythonOutput += data.toString();
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  pythonProcess.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
+    try {
+      const jsonResponse = JSON.parse(pythonOutput);
+      res.status(200).json(jsonResponse);
+    } catch (error) {
+      console.error('Error parsing JSON from Python script', error);
+      res.status(500).json({ message: 'Error processing data' });
+    }
+  });
+
+  // res.status(200).json({
+  //   message: 'File uploaded and processed successfully',
+  //   major: major,
+  //   classYear: year,
+  //   careerGoals: career,
+  //   courses: courses
+  // });
+  
 });
 // Route for handling single file upload
 // app.post('/upload/file', upload.single('resume'), (req, res) => {
