@@ -45,7 +45,7 @@ try:
     response_body = json.loads(response['body'].read())
     model_response = response_body['content'][0]['text']
     print("Response:", model_response)
-
+    
     # Append to conversation history
     conversation_history.append({"role": "user", "content": message})
     conversation_history.append({"role": "assistant", "content": model_response})

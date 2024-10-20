@@ -119,7 +119,14 @@ app.post('/upload/json', (req, res) => {
   pythonProcess.on('close', (code) => {
     console.log(`child process exited with code ${code}`);
     try {
-      const jsonResponse = JSON.parse(pythonOutput);
+      // Log the raw output for debugging
+      console.log('Raw Python Output:', pythonOutput);
+
+      
+      // Parse the cleaned output
+      const jsonResponse = JSON.parse(jsonString);
+
+      // Send the JSON response
       res.status(200).json(jsonResponse);
     } catch (error) {
       console.error('Error parsing JSON from Python script', error);
@@ -183,7 +190,57 @@ app.post('/upload/json', (req, res) => {
 
   
 // });
+app.get('/upload/message', (req, res) => { 
+  const pathToPythonScript = path.join(__dirname, 'chat.py');
+  const promptFilePathClear = path.join(__dirname, 'uploads', 'prompt.txt');
 
+  fs.writeFile(promptFilePathClear, '', (err) => {
+    if (err) {
+      console.error('Error clearing prompt.txt', err);
+      return res.status(500).json({ message: 'Error clearing prompt' });
+    }
+    console.log('prompt.txt cleared');
+  });
+  const promptFilePath = path.join(__dirname, 'uploads', 'prompt.txt');
+
+  fs.writeFile(promptFilePath, req.body.content, (err) => {
+    if (err) {
+      console.error('Error writing to prompt.txt', err);
+      return res.status(500).json({ message: 'Error saving prompt' });
+    }
+    console.log('Prompt saved to prompt.txt');
+  });
+  const pythonProcess = spawn('python', [pathToPythonScript, promptFilePath]);
+
+  let pythonOutput = '';
+
+  pythonProcess.stdout.on('data', (data) => {
+    pythonOutput += data.toString();
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  pythonProcess.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
+    try {
+      // Log the raw output for debugging
+      console.log('Raw Python Output:', pythonOutput);
+
+      
+      // Parse the cleaned output
+      const jsonResponse = JSON.parse(jsonString);
+
+      // Send the JSON response
+      res.status(200).json(jsonResponse);
+    } catch (error) {
+      console.error('Error parsing JSON from Python script', error);
+      res.status(500).json({ message: 'Error processing data' });
+    }
+  });
+
+ });
 // Serve static files (for client testing purposes)
 app.use(express.static('public'));
 

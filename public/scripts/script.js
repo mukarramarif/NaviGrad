@@ -40,7 +40,7 @@ $('#sendBtn').click(() => {
         console.log(msgJson);
         $("#chatBox").append(`<div class='userMsg'>${userMsg}</div>`);
         $('#userInput').val('');
-    
+        $("#chatBox").append(throbber);
         let msg = "";
         $.ajax({
             url: '/upload/message', //replace with server endpoint
@@ -94,7 +94,7 @@ async function firstClick(){
     */
     console.log(msgJson);
 
-    $('#major').val('');
+  
     $('#year').val('');
     $('#courses').val('');
     $('#career').val('');
