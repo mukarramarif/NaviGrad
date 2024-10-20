@@ -51,7 +51,7 @@ $('#sendBtn').click(() => {
             success: function(response) {
                 console.log('Success:', response);
                 try {
-                    const data = JSON.parse(response); 
+                    const data = response; 
                     console.log('Received Data:', data);
                     msg = data.content;
                 } catch (e) {
@@ -107,7 +107,7 @@ async function firstClick(){
         contentType: 'application/json',
         processData: false,
         success: function(response) {
-            const data = JSON.parse(response); 
+            const data = response; 
             console.log('Received Data:', data);
             msg = data.content;
         },
