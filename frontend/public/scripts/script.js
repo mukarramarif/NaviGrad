@@ -42,7 +42,7 @@ $('#sendBtn').click(() => {
         $("#chatBox").append(`<div class='userMsg'>${userMsg}</div>`);
         $('#userInput').val('');
     
-        /*
+        let msg = "";
         $.ajax({
             url: 'your-server-endpoint', //replace with server endpoint
             type: 'POST',
@@ -51,14 +51,20 @@ $('#sendBtn').click(() => {
             processData: false,
             success: function(response) {
                 console.log('Success:', response);
+                try {
+                    const data = JSON.parse(response); 
+                    console.log('Received Data:', data);
+                    msg = data.content;
+                } catch (e) {
+                    console.error('Failed to parse JSON:', e);
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error:', textStatus, errorThrown);
             }
         });
-        */
     
-        writeResponse("msg");
+        writeResponse(msg);
     }
 
 
@@ -98,7 +104,7 @@ async function firstClick(){
     $('#courses').val('');
     $('#career').val('');
 
-    /*
+    $("#chatBox").append(throbber);
     $.ajax({
         url: 'your-server-endpoint', //replace with server endpoint
         type: 'POST',
@@ -106,14 +112,15 @@ async function firstClick(){
         contentType: false,
         processData: false,
         success: function(response) {
-            console.log('Success:', response);
+            const data = JSON.parse(response); 
+            console.log('Received Data:', data);
+            msg = data.content;
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error('Error:', textStatus, errorThrown);
         }
     });
-    */
-    $("#chatBox").append(throbber);
+    
 
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     await sleep(2000);
