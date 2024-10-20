@@ -59,7 +59,7 @@ if (!fs.existsSync('./uploads')) {
 }
 // Route for handling JSON data
 app.post('/upload/json', (req, res) => {
-  
+  console.log(req.body);
   const { major, year, courses, career } = req.body;
   if (!major || !year || !courses || !career) {
     return res.status(400).json({ message: 'All fields are required' });
@@ -74,7 +74,7 @@ app.post('/upload/json', (req, res) => {
       { id: 'major', title: 'Major' },
       { id: 'classYear', title: 'Class Year' },
       { id: 'careerGoals', title: 'Career Goals' },
-      { id: 'file', title: 'File' }
+      { id: 'courses', title: 'courses' }
     ],
     append: true
   });
@@ -99,8 +99,7 @@ app.post('/upload/json', (req, res) => {
       major: major,
       classYear: year,
       careerGoals:career,
-      courses: courses,
-      file: req.file
+      courses: courses
     });
 
 });

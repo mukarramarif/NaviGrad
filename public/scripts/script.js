@@ -31,29 +31,37 @@ $('#initialSubmit').click(() => {
 
 
 $('#sendBtn').click(() => {
-    let userMsg = $('#userInput').val();
-    const msgJson = {"message":userMsg};
-    const jsonString = JSON.stringify(msgJson);
-
-    console.log(jsonString);
-
     
+    if ($('#userInput').val() != "" && !waiting){
+        waiting = true;
+        let userMsg = $('#userInput').val();
+        const msgJson = {"message":userMsg};
+        const jsonString = JSON.stringify(msgJson);
+    
+        console.log(jsonString);
+        $("#chatBox").append(`<div class='userMsg'>${userMsg}</div>`);
+        $('#userInput').val('');
+    
+        
+        $.ajax({
+            url: '/upload/json', //replace with server endpoint
+            type: 'POST',
+            data: jsonString,
+            contentType: 'application/json',
+            processData: false,
+            success: function(response) {
+                console.log('Success:', response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+            }
+        });
+        
+    
+        writeResponse("msg");
+    }
 
-    /*
-    $.ajax({
-        url: 'your-server-endpoint', //replace with server endpoint
-        type: 'POST',
-        data: jsonString,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            console.log('Success:', response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-        }
-    });
-    */
+
 });
 
 async function firstClick(){
@@ -64,12 +72,20 @@ async function firstClick(){
     let courses = $('#courses').val();
     let career = $('#career').val();
 
-    let formData = new FormData();
-    formData.append('type', "initial");
-    formData.append('major', major);
-    formData.append('year', year);
-    formData.append('courses', courses);
-    formData.append('career', career);
+    $('#major').val('');
+    $('#year').val('');
+    $('#courses').val('');
+    $('#career').val('');
+
+    const msgJson = {"major":major, "year":year, "courses":courses, "career":career};
+    // let formData = new FormData();
+  
+    console.log(msgJson);
+
+    //formData.append('major', major);
+    //formData.append('year', year);
+    //formData.append('courses', courses);
+    //formData.append('career', career);
 
     //pdf handler
     /*
@@ -79,23 +95,20 @@ async function firstClick(){
     }
     formData.append('resume', file);
     */
-    console.log(formData.get('major'));
-    console.log(formData.get('year'));
-    console.log(formData.get('courses'));
-    console.log(formData.get('career'));
-    console.log(formData.get('resume'));
+    //console.log(formData);
+    //console.log(formData.get('major'));
+    //console.log(formData.get('year'));
+    //console.log(formData.get('courses'));
+    //console.log(formData.get('career'));
+  
 
-    $('#major').val('');
-    $('#year').val('');
-    $('#courses').val('');
-    $('#career').val('');
-
-    /*
+    
+    
     $.ajax({
-        url: 'your-server-endpoint', //replace with server endpoint
+        url: '/upload/json', //replace with server endpoint
         type: 'POST',
-        data: formData,
-        contentType: false,
+        data: JSON.stringify(msgJson),
+        contentType: 'application/json',
         processData: false,
         success: function(response) {
             console.log('Success:', response);
@@ -104,13 +117,15 @@ async function firstClick(){
             console.error('Error:', textStatus, errorThrown);
         }
     });
-    */
+
+
     $("#chatBox").append(throbber);
 
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     await sleep(2000);
     msg = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     writeResponse(msg);
+
 }
 
 async function writeResponse(msg){
