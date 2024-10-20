@@ -41,9 +41,13 @@ with open('requiredcourses.csv', 'r') as file:
        csv_reader = csv.reader(file)
        csv_data = [row for row in csv_reader]
        csv_string = "\n".join([",".join(row) for row in csv_data])
-  
 
-required_courses = "'According to what I entered in the website, I am a mechanical engineering major and these are the courses required " + csv_string + "'"
+with open('uploads/data.csv', 'r') as file:
+       csv_reader = csv.reader(file)
+       for row in csv_reader:
+            major,year,career,courses = row
+
+required_courses = "'According to what I entered in the website, I am a {major}} major and these are the courses required for my major" + csv_string + "'"
 
 
 
@@ -56,15 +60,16 @@ conversation_history += ("{'role': 'user', 'content': 'Hi, what is your name?'},
 conversation_history += "{'role': 'user', 'content':" + required_courses + "}"
 
 
+    
 done = False
 counter = 1
 
 
-while not done:
-   prompt = input("You: ")
-  
-   if prompt.lower() in ["quit","exit","done"]:
-       break
+
+prompt = input("You: ")
+
+# if prompt.lower() in ["quit","exit","done"]:
+#     break
 
 
    # Parse and print the response
@@ -78,61 +83,60 @@ while not done:
    conversation_history += prompt
 
 
-   # Prepare the request body
-   request_body = json.dumps({
-       "anthropic_version": "bedrock-2023-05-31",
-       "max_tokens": 300,
-       "temperature": 0.7,
-       "messages": [
-           {"role": "user", "content": conversation_history}
-       ]
-   })
+# Prepare the request body
+request_body = json.dumps({
+    "anthropic_version": "bedrock-2023-05-31",
+    "max_tokens": 300,
+    "temperature": 0.7,
+    "messages": [
+        {"role": "user", "content": conversation_history}
+    ]
+})
 
 
-   # Specify the Claude 3.5 Sonnet model ID
-   model_id = 'anthropic.claude-3-5-sonnet-20240620-v1:0'
+# Specify the Claude 3.5 Sonnet model ID
+model_id = 'anthropic.claude-3-5-sonnet-20240620-v1:0'
 
 
-   try:
-      
-       response = bedrock_runtime.invoke_model(
-           modelId=model_id,
-           body=request_body
-       )
+try:
+    
+    response = bedrock_runtime.invoke_model(
+        modelId=model_id,
+        body=request_body
+    )
 
 
-       # Parse and print the response
-       response_body = json.loads(response['body'].read())
-       model_response = response_body['content'][0]['text']
+    # Parse and print the response
+    response_body = json.loads(response['body'].read())
+    model_response = response_body['content'][0]['text']
 
 
-       file_path = "conversation_history.json"
+    
+    print(json({"role": "assistant", "content":model_response}))
 
 
-       
-       print({"role": "assistant", "content":model_response})
+    # Append to conversation history
+    conversation_history += "{'role': 'user', 'content':" + prompt + "}"
+    conversation_history += "{'role': 'assistant', 'content':" + model_response + "}"
 
-
-       # Append to conversation history
-       conversation_history += "{'role': 'user', 'content':" + prompt + "}"
-       conversation_history += "{'role': 'assistant', 'content':" + model_response + "}"
-
+    with open('conversation.txt', 'w') as file:
+        file.write(conversation_history)
 
 
 
-   except ClientError as e:
-       error_code = e.response['Error']['Code']
-       error_message = e.response['Error']['Message']
-       print(f"Error: {error_code} - {error_message}")
-   except Exception as e:
-       print(f"Unexpected error: {str(e)}")
+except ClientError as e:
+    error_code = e.response['Error']['Code']
+    error_message = e.response['Error']['Message']
+    print(f"Error: {error_code} - {error_message}")
+except Exception as e:
+    print(f"Unexpected error: {str(e)}")
 
 
-   # Print debugging information
-   # print("\nDebugging Information:")
-   # print(f"AWS Region: {bedrock_runtime.meta.region_name}")
-   # print(f"Model used: {model_id}")
-   # print("Please ensure you have the correct permissions and that this model is available in your region.")
+# Print debugging information
+# print("\nDebugging Information:")
+# print(f"AWS Region: {bedrock_runtime.meta.region_name}")
+# print(f"Model used: {model_id}")
+# print("Please ensure you have the correct permissions and that this model is available in your region.")
 
 
 

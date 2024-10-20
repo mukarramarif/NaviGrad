@@ -1,0 +1,64 @@
+{'role': 'user', 'content': 'Hi, what is your name?'},'role': 'assistant', 'content': 'Hi! My name is Chip, your AI academic counselor.'{'role': 'user', 'content':'According to what I entered in the website, I am a {major}} major and these are the courses required for my majorWRT 001
+MATH 021 (Calculus I)
+ENGR 005 (Introduction to Engineering Practice)
+ENGR 0012
+CHM 030
+PHY 011
+PHY 012 (Introductory Physics I and Lab)
+WRT 002
+MATH 022 (Calculus II)
+ME 010 (Graphics for Engineering Design
+MECH 003 (Fundamentals of Engineering Mechanics)
+ME 017 (Numerical Methods in ME)
+ME 033 (Engineering Materials and Processes)
+MATH 023 (Calculus III)
+ME 104 (Thermodynamics I)
+MECH 012 (Strength of Materials)
+MATH 205 (Linear Methods)
+PHY 021 (Introductory Physics II and Lab)
+PHY 022
+HSS Elective
+ME 021 (Mechanical Engineering Laboratory I)
+ME 231 (Fluid Mechanics)
+MECH 102 Dynamics
+HSS Elective
+ME 215 (Engineering Reliability)
+ME 121 (Mechanical Engineering Lab II)
+ME 240 (Manufacturing)
+ME 252 (Mechanical Elements)
+ME 211 
+ECE 083 (Introduction to Electrical Engineering)
+ECE 162 (Electrical Laboratory)
+ME 242  (Mechanical Engineering Systems)
+ME 111 (Professional Development (fall only])
+Engineering Required/Technical-Elective courses
+ME 212
+HSS Elective
+FREE Elective
+ENGINEERING REQUIRED/ TEXHNICAL ELECTIVE courses
+HSS & FREE Electives
+ME 321
+ME 207
+MECH 302
+MECH 305
+ME 304
+ME 322
+ME 331
+ME 343
+Engineering Elective B
+Engineering Electives C'}hi{'role': 'user', 'content':hi}{'role': 'assistant', 'content':Hello! It's nice to meet you. Based on the information you've provided, it looks like you're a Mechanical Engineering major. That's an exciting and challenging field!
+
+You've listed quite a comprehensive set of courses required for your major. These courses cover a wide range of topics essential for mechanical engineering, including:
+
+1. Mathematics (Calculus I, II, III, Linear Methods)
+2. Physics
+3. Chemistry
+4. Engineering fundamentals
+5. Mechanical engineering specifics (thermodynamics, fluid mechanics, dynamics, etc.)
+6. Electrical engineering basics
+7. Laboratory courses
+8. Professional development
+
+It's a rigorous program that will give you a strong foundation in mechanical engineering principles and practices. 
+
+Is there anything specific you'd like to know about your course requirements or your major in general? I'd be happy to help you understand your academic path better or discuss any concerns you might have about your studies.}

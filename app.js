@@ -104,7 +104,7 @@ app.post('/upload/json', (req, res) => {
   //   });
   const pathToPythonScript = path.join(__dirname, 'chat.py');
 
-  const pythonProcess = spawn('python', [pathToPythonScript, 'uploads/data.csv']);
+  const pythonProcess = spawn('python3', [pathToPythonScript, 'uploads/data.csv']);
 
   let pythonOutput = '';
 
