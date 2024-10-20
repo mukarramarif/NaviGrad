@@ -67,7 +67,14 @@ app.post('/upload/json', (req, res) => {
   if (!major || !year || !courses || !career) {
     return res.status(400).json({ message: 'All fields are required' });
   }
-  
+  // const promptFilePathClear = path.join(__dirname, 'uploads', 'prompt.txt');
+  // fs.writeFile(promptFilePathClear, '', (err) => {
+  //   if (err) {
+  //     console.error('Error clearing prompt.txt', err);
+  //     return res.status(500).json({ message: 'Error clearing prompt' });
+  //   }
+  //   console.log('prompt.txt cleared');
+  // });
   
  
 
@@ -131,6 +138,7 @@ app.post('/upload/json', (req, res) => {
 
       // Send the JSON response
       res.status(200).json(jsonResponse);
+      
     } catch (error) {
       console.error('Error parsing JSON from Python script', error);
       res.status(500).json({ message: 'Error processing data' });
@@ -194,30 +202,26 @@ app.post('/upload/json', (req, res) => {
   
 // });
 app.post('/upload/message', (req, res) => {
+  const pathToPythonScript = path.join(__dirname, 'chat.py');
+  const promptFilePathClear = path.join(__dirname, 'uploads', 'prompt.txt');
   string = '';
-  firstMsg = false;
+  // fs.writeFile(promptFilePathClear, '', (err) => {
+  //   if (err) {
+  //     console.error('Error clearing prompt.txt', err);
+  //     return res.status(500).json({ message: 'Error clearing prompt' });
+  //   }
+  //   console.log('prompt.txt cleared');
+  // });
   const resultString = Object.entries(req.body)
     .map(([key, value]) => `${key}: ${value}`)
     .join(', ');
   if(Msgcount ==0){
     firstMsg = true;
     Msgcount++;
-    string =firstMsg+""+resultString;
+    string =resultString;
   }
   console.log('string',string);
-
-  const pathToPythonScript = path.join(__dirname, 'chat.py');
-  const promptFilePathClear = path.join(__dirname, 'uploads', 'prompt.txt');
-
-  fs.writeFile(promptFilePathClear, '', (err) => {
-    if (err) {
-      console.error('Error clearing prompt.txt', err);
-      return res.status(500).json({ message: 'Error clearing prompt' });
-    }
-    console.log('prompt.txt cleared');
-  });
   const promptFilePath = path.join(__dirname, 'uploads', 'prompt.txt');
-
   fs.writeFile(promptFilePath, string, (err) => {
     if (err) {
       console.error('Error writing to prompt.txt', err);
@@ -225,7 +229,7 @@ app.post('/upload/message', (req, res) => {
     }
     console.log('Prompt saved to prompt.txt');
   });
-  const pythonProcess = spawn('python');
+  const pythonProcess = spawn('python', [pathToPythonScript, 'uploads/prompt.txt']);
 
   let pythonOutput = '';
 
@@ -240,20 +244,22 @@ app.post('/upload/message', (req, res) => {
   pythonProcess.on('close', (code) => {
     console.log(`child process exited with code ${code}`);
     try {
-      // Log the raw output for debugging
-      console.log('Raw Python Output:', pythonOutput);
+        // Log the raw output for debugging
+        console.log('Raw Python Output:', pythonOutput);
 
-      
-      // Parse the cleaned output
-      const jsonResponse = JSON.parse(jsonString);
+        // Parse the cleaned output
+        const trimmedOutput = pythonOutput.trim();
+        console.log("Trimmed Output:", trimmedOutput);
 
-      // Send the JSON response
-      res.status(200).json(jsonResponse);
+        const jsonResponse = JSON.parse(trimmedOutput);
+
+        // Send the JSON response
+        res.status(200).json(jsonResponse);
     } catch (error) {
-      console.error('Error parsing JSON from Python script', error);
-      res.status(500).json({ message: 'Error processing data' });
+        console.error('Error parsing JSON from Python script', error);
+        res.status(500).json({ message: 'Error processing data' });
     }
-  });
+});
 
  });
 // Serve static files (for client testing purposes)

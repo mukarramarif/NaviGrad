@@ -45,8 +45,8 @@ with open('uploads/data.csv', 'r') as file:
 required_courses = f"'According to what I entered in the website, I am a {major} major in {year}, I have taken the courses {coursestaken}, and I want to pursue a career in {career}. These are the courses required for a mechanical engineering major: {csv_string}'"
 
 
-if os.path.exist('uploads/prompt.txt'):
-    with open('uploads/prompt.txt', 'r') as file:
+if os.path.exists('uploads\prompt.txt'):
+    with open('uploads\prompt.txt', 'r') as file:
         prompt = file.read()
         if prompt == '':
             beginning = True
@@ -57,13 +57,13 @@ else:
 
 if beginning:
     prompt = "Introduce Yourself"
-    with open("conversation.txt", 'w') as file:
-        file.write("")
 
     # Initialize conversation history
     conversation_history = ""
     conversation_history += ("{'role': 'user', 'content': 'Hi, what is your name?'},'role': 'assistant', 'content': 'Hi! My name is Chip, your AI academic counselor.'")
     conversation_history += "{'role': 'user', 'content':" + required_courses + "}" 
+    with open("conversation.txt", 'w') as file:
+        file.write(conversation_history)
 
 done = False
 counter = 1
@@ -112,6 +112,7 @@ while not done:
         done = True
         response_json = {"role": "assistant", "content": model_response}
         print(json.dumps(response_json))
+        sys.exit(0)
         
 
 
