@@ -95,7 +95,7 @@ async function firstClick(){
     console.log(msgJson);
 
   
-    $('#year').val('');
+    
     $('#courses').val('');
     $('#career').val('');
 
