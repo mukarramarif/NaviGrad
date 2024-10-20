@@ -29,15 +29,22 @@
         <input type="text" id="year" class="inputBox" placeholder="Year"/><br>
         <input type="text" id="courses" class="inputBox" placeholder="Courses Taken"/><br>
         <input type="text" id="career" class="inputBox" placeholder="Career Goals"/><br>
-        <br>
+        <!-- <br>
         <input type="file" name="pdfUpload" accept="application/pdf" id="fileInput" class="fileInput" />
         <label for="fileInput" class="customInput">Upload Resume</label>
-        <div class="fileName" id="fileName">No file chosen</div>
+        <div class="fileName" id="fileName">No file chosen</div> -->
         
-        <button type="button" id="initialSubmit">Message Chip</button>
+        <div id="buttonHolder"><button type="button" id="initialSubmit">Message Chip</button></div>
         <div id="submitText">(All fields are optional, but the more we know, the more we can help!)</div> 
     </div>
     
+    <div id="chatBox"></div>
+    
+    <div id="chatInputContainer">
+        <textarea id="userInput" rows="2" placeholder="Type your message..."></textarea>
+        <button id="sendBtn">Send</button>
+    </div>
+
     <script src="scripts/jquery.min.js" crossorigin="anonymous" defer></script>
     <script src="scripts/script.js" defer></script>
 </body>
