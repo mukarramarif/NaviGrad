@@ -1,5 +1,8 @@
 # AI_Advisor_For_College
 
+`Video Overview` 
+
+[![alt text](https://i9.ytimg.com/vi/KR56J_FQccg/mqdefault.jpg?sqp=CNyj37gG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEMgVihlMA8=&rs=AOn4CLADMTBTz5mDaXc-pWuehWKUybjpfQ)](https://youtu.be/KR56J_FQccg)
 
 ## Overview
 
