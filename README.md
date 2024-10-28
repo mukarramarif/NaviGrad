@@ -1,4 +1,4 @@
-# AI_Advisor_For_College
+# NaviGrad
 
 `Video Overview` 
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-The AI_Advisor_For_College project leverages advanced AI models and modern web technologies to provide a seamless user experience. 
+The NaviGrad project leverages advanced AI models and modern web technologies to provide a seamless user experience. 
 
 ### Claude Sonnet 3.5 Model
 
@@ -20,7 +20,7 @@ Express.js is a minimal and flexible Node.js web application framework that prov
 
 jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, and animation much simpler with an easy-to-use API that works across a multitude of browsers. In this project, jQuery is used on the frontend to create a dynamic and interactive user interface. It handles user inputs, sends AJAX requests to the Express.js backend, and updates the UI based on the responses received.
 
-By combining the Claude Sonnet 3.5 model with Express.js and jQuery, the AI_Advisor_For_College project provides a powerful and user-friendly platform for college students seeking advice and information.
+By combining the Claude Sonnet 3.5 model with Express.js and jQuery, NaviGrad provides a powerful and user-friendly platform for college students seeking advice and information.
 
 
 
@@ -31,11 +31,11 @@ To run the server, follow these steps:
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/yourusername/AI_Advisor_For_College.git
+    git clone https://github.com/yourusername/NaviGrad.git
     ```
 2. **Navigate to the project directory**:
     ```sh
-    cd AI_Advisor_For_College
+    cd NaviGrad
     ```
 3. **Install the dependencies**:
     ```sh
